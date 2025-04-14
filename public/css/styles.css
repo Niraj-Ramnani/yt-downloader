@@ -4,36 +4,64 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Light Mode (default) */
+    --bg-color: #F7FAFC; /* Soft Gray */
+    --text-color: #FFC107; /* Yellow */
+    --button-bg: #FFC107;
+    --button-hover: #FFCA28; /* Lighter Yellow */
+    --download-bg: #2D3748; /* Dark Gray */
+    --download-hover: #4A5568;
+    --success-bg: #48BB78; /* Soft Green */
+    --error-bg: #F56565; /* Soft Red */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode */
+        --bg-color: #000000; /* Black */
+        --text-color: #FFC107; /* Yellow */
+        --button-bg: #FFC107;
+        --button-hover: #FFCA28;
+        --download-bg: #4A5568; /* Dark Gray */
+        --download-hover: #718096;
+        --success-bg: #38A169; /* Darker Green */
+        --error-bg: #E53E3E; /* Darker Red */
+        --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
-    color: #FFFFFF;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
-    transition: background 0.5s ease;
+  
+    transition: background-color 0.5s ease, color 0.3s ease;
 }
 
 header {
     text-align: center;
     padding: 2.5rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     animation: fadeIn 1s ease-in-out;
-    position: relative;
+    overflow: hidden;
 }
 
-header h1 {
+.unique-heading {
     font-size: 3rem;
     margin-bottom: 0.5rem;
-    color: #FF6B6B;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    transition: color 0.3s ease;
+    transition: color 0.5s ease, transform 0.5s ease, text-shadow 0.5s ease;
 }
 
-header h1:hover {
-    color: #FF9F43;
+.unique-heading:hover {
+    color: #FFCA28; /* Lighter Yellow */
+    transform: scale(1.1); /* Slight scale up */
+    text-shadow: 0 0 10px #FFCA28, 0 0 20px #FFC107; /* Glow effect */
 }
 
 header p {
@@ -42,7 +70,7 @@ header p {
 }
 
 .header-gif {
-    width: 100px;
+    width: 250px; /* Larger GIF */
     margin-top: 1rem;
     opacity: 0.8;
     transition: opacity 0.3s ease;
@@ -54,35 +82,39 @@ header p {
 
 .converter {
     max-width: 700px;
-    margin: 2rem auto;
+    margin: 0.5rem auto;
     padding: 0 1.5rem;
     animation: slideUp 1s ease-out;
+    overflow: hidden;
     position: relative;
 }
 
 .gif-container {
     text-align: center;
     margin-bottom: 1rem;
+    overflow: hidden;
 }
 
 .loading-gif {
-    width: 50px;
+    width: 210px; /* Larger loading GIF */
     vertical-align: middle;
 }
 
 .converter-form {
     display: flex;
-    gap: 1.5rem;
+    gap: 3.5rem;
     background: rgba(255, 255, 255, 0.1);
     padding: 1.5rem;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
 }
 
 .converter-form:hover {
     transform: scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 .converter-form input {
@@ -92,7 +124,7 @@ header p {
     border-radius: 8px;
     font-size: 1.1rem;
     background: rgba(255, 255, 255, 0.2);
-    color: #FFFFFF;
+    color: var(--text-color);
     outline: none;
     transition: background 0.3s ease, padding 0.2s ease;
 }
@@ -105,8 +137,8 @@ header p {
 .converter-form button {
     padding: 1rem 2rem;
     border: none;
-    background: #FF6B6B;
-    color: #FFFFFF;
+    background: var(--button-bg);
+    color: var(--bg-color); /* Contrast with background */
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
@@ -114,7 +146,7 @@ header p {
 }
 
 .converter-form button:hover {
-    background: #FF9F43;
+    background: var(--button-hover);
     transform: translateY(-2px);
 }
 
@@ -125,42 +157,50 @@ header p {
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
     transition: opacity 0.3s ease;
-    position: relative;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+}
+
+.result.active {
+    max-height: 500px;
+    opacity: 1;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
 .result.success {
-    background: rgba(40, 167, 69, 0.2);
-    border: 2px solid #28A745;
+    background: rgba(var(--success-bg), 0.2);
+    border: 2px solid var(--success-bg);
 }
 
 .result.error {
-    background: rgba(220, 53, 69, 0.2);
-    border: 2px solid #DC3545;
+    background: rgba(var(--error-bg), 0.2);
+    border: 2px solid var(--error-bg);
 }
 
 .result h3 {
     margin: 0.7rem 0;
-    color: #FF6B6B;
+    color: var(--button-bg);
     transition: color 0.3s ease;
 }
 
 .result h3:hover {
-    color: #FF9F43;
+    color: var(--button-hover);
 }
 
 .download-btn {
     display: inline-block;
     margin-top: 1.5rem;
     padding: 1rem 2.5rem;
-    background: #4ECDC4;
-    color: #FFFFFF;
+    background: var(--download-bg);
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 8px;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .download-btn:hover {
-    background: #45B7D1;
+    background: var(--download-hover);
     transform: translateY(-2px);
 }
 
@@ -168,14 +208,14 @@ footer {
     text-align: center;
     padding: 1.5rem;
     margin-top: auto;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     border-top: 2px solid rgba(255, 255, 255, 0.1);
     animation: fadeIn 1.5s ease-in-out 0.5s backwards;
-    position: relative;
+    overflow: hidden;
 }
 
 .footer-gif {
-    width: 80px;
+    width: 150px; /* Larger footer GIF */
     margin-top: 0.5rem;
     opacity: 0.7;
     transition: opacity 0.3s ease;
@@ -229,6 +269,10 @@ footer {
     }
 
     .header-gif, .footer-gif {
-        width: 60px;
+        width: 120px; /* Adjusted for mobile */
+    }
+
+    .loading-gif {
+        width: 80px; /* Adjusted for mobile */
     }
 }
