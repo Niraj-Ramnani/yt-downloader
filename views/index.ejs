@@ -32,6 +32,13 @@
 
   <main class="main-container">
     <section class="converter glass-card">
+        <div id="progressBar" class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="gif-container">
+            <img src="/images/loader-unscreen.gif" alt="Loading Spinner GIF" class="loading-gif" style="display: none;">
+        </div>
+        
       <form action="/convert" method="POST" class="converter-form" id="downloadForm">
         <input type="text" name="videoLink" placeholder="Paste YouTube video URL..." value="<%= videoLink || '' %>" required />
         <button type="submit">🔁 Convert</button>
@@ -52,5 +59,6 @@
   <footer>
     <p>© 2025 | Made with ❤️ by <a href="https://www.linkedin.com/in/niraj-ramnani/" target="_blank">Niraj Ramnani</a></p>
   </footer>
+  <script src="/js/script.js"></script>
 </body>
 </html>
