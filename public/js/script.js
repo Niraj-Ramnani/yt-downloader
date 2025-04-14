@@ -1,16 +1,15 @@
 document.getElementById('downloadForm').addEventListener('submit', function(e) {
      const loadingGif = document.querySelector('.loading-gif');
      const result = document.querySelector('.result');
-     loadingGif.style.display = 'inline-block'; // Show loading GIF
-     this.querySelector('button').disabled = true; // Disable button
-     result.classList.remove('active'); // Hide result initially
+     loadingGif.style.display = 'inline-block'; 
+     this.querySelector('button').disabled = true; 
+     result.classList.remove('active'); 
  
-     // Simulate result display after submission (adjust based on server response if needed)
      setTimeout(() => {
          loadingGif.style.display = 'none';
          this.querySelector('button').disabled = false;
-         result.classList.add('active'); // Show result after loading
-     }, 2000); // Adjust timeout to match server response time
+         result.classList.add('active'); 
+     }, 2000); 
  });
  
  document.addEventListener('DOMContentLoaded', function() {
@@ -23,7 +22,7 @@ document.getElementById('downloadForm').addEventListener('submit', function(e) {
          }
      });
  
-     // Show existing result on page load if present
+     
      const result = document.querySelector('.result');
      if (result && '<%= success %>' !== 'null') {
          result.classList.add('active');

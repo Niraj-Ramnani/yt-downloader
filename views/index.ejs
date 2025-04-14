@@ -1,48 +1,56 @@
+<!-- index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Video to MP3 Downloader</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+<link rel="icon" type="image/png" href="/images/image.png">
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Convert YouTube videos to MP3 quickly and easily. No ads, no limits.">
+<meta name="keywords" content="YouTube, MP3, converter, downloader, audio, music">
+<meta name="author" content="Niraj Ramnani">
+
+<!-- Open Graph for social media previews -->
+<meta property="og:title" content="YouTube to MP3 Converter">
+<meta property="og:description" content="Fast and easy YouTube to MP3 conversion tool.">
+<meta property="og:image" content="/images/preview.png">
+<meta property="og:url" content="https://your-domain.com">
+<meta name="twitter:card" content="summary_large_image">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube MP3 Downloader</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <h1 class="unique-heading">YouTube Downloader</h1>
-        <p>Convert YouTube videos to MP3 file downloadable links in seconds!</p>
-        <img src="/images/icon1.gif" alt="Music Wave GIF" class="header-gif">
-    </header>
-    <main>
-        <section class="converter">
-            <div class="gif-container">
-                <img src="/images/loader-unscreen.gif" alt="Loading Spinner GIF" class="loading-gif" style="display: none;">
-            </div>
-            <form action="/convert" method="POST" class="converter-form" id="downloadForm">
-                <input
-                    type="text"
-                    name="videoLink"
-                    placeholder="Paste YouTube video URL here"
-                    value="<%= videoLink || '' %>"
-                    required
-                />
-                <button type="submit">Get Download Link</button>
-            </form>
+  <header>
+    <h1 class="unique-heading">🎵 YouTube to MP3</h1>
+    <p>Fast & Easy conversion of your favorite videos</p>
+    <img src="/images/icon1.gif" alt="Music Wave" class="header-gif" />
+  </header>
 
-            <% if (success !== null) { %>
-                <div class="result <%= success ? 'success' : 'error' %>">
-                    <p><%= message %></p>
-                    <% if (success && song_link) { %>
-                        <h3><%= song_title %></h3>
-                        <a href="<%= song_link %>" target="_blank" class="download-btn">Download Now</a>
-                    <% } %>
-                </div>
-            <% } %>
-        </section>
-    </main>
-    <footer>
-        <p>© 2025 YouTube to MP3 Downloader. Made by Niraj Ramnani | <a href="https://www.linkedin.com/in/niraj-ramnani/" target="_blank">LinkedIn</a></p>
-    </footer>
-    <script src="/js/script.js"></script>
+  <main class="main-container">
+    <section class="converter glass-card">
+      <form action="/convert" method="POST" class="converter-form" id="downloadForm">
+        <input type="text" name="videoLink" placeholder="Paste YouTube video URL..." value="<%= videoLink || '' %>" required />
+        <button type="submit">🔁 Convert</button>
+      </form>
+
+      <% if (success !== null) { %>
+        <div class="result <%= success ? 'success active' : 'error active' %>">
+          <p><%= message %></p>
+          <% if (success && song_link) { %>
+            <h3><%= song_title %></h3>
+            <a href="<%= song_link %>" target="_blank" class="download-btn">⬇️ Download MP3</a>
+          <% } %>
+        </div>
+      <% } %>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 | Made with ❤️ by <a href="https://www.linkedin.com/in/niraj-ramnani/" target="_blank">Niraj Ramnani</a></p>
+  </footer>
 </body>
 </html>
