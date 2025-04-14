@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<section class="converter">
+    <form action="/convert" method="POST" class="converter-form">
+        <input
+            type="text"
+            name="videoLink"
+            placeholder="Paste YouTube video URL here"
+            required
+        />
+        <button type="submit">Get Download Link</button>
+    </form>
+
+    <% if (success !== null) { %>
+        <div class="result <%= success ? 'success' : 'error' %>">
+            <p><%= message %></p>
+            <% if (success && song_link) { %>
+                <h3><%= song_title %></h3>
+                <a href="<%= song_link %>" target="_blank" class="download-btn">Download Now</a>
+            <% } %>
+        </div>
+    <% } %>
+</section>
+
+<%- include('partials/footer') %>
